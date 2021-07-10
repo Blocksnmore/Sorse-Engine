@@ -57,6 +57,7 @@ interface sorseEngineScriptInterface {
 	author?: string;
 	description?: string;
 	version?: string;
+	disabled?: boolean;
 
 	priority?: number;
 
@@ -65,16 +66,23 @@ interface sorseEngineScriptInterface {
 	// Script methods
 	onReady?: (engine: Sorse) => void | Promise<void>;
 	onRender?: (engine: Sorse) => void | Promise<void>;
-	onInput?: (engine: Sorse) => void | Promise<void>;
+	onInput?: (engine: Sorse, event: KeyboardEvent | MouseEvent) => void | Promise<void>;
 }
 
 interface sorseEngineSpriteInterface {
 	position: { x: number; y: number };
-	active?: boolean;
+	disabled?: boolean;
 
 	priority?: number;
 
 	onReady?: (engine: Sorse) => void | Promise<void>;
 	onRender?: (engine: Sorse) => void | Promise<void>;
-	onInput?: (engine: Sorse) => void | Promise<void>;
+	onInput?: (engine: Sorse, event: KeyboardEvent | MouseEvent) => void | Promise<void>;
+}
+
+interface sorseEngineClearRectInterface {
+	x: number;
+	y: number;
+	width: number;
+	height: number;
 }

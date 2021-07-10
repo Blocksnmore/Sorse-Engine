@@ -1,16 +1,14 @@
 (async () => {
-	sorseLog('Loading Sorse', 'PostEngineLoad');
-	sorse.isDoneLoading = false;
+	sorseLog('Loading Post Engine Load Manager', 'PostEngineLoad');
 	const video = sorseMakeElement('video') as HTMLVideoElement;
 	video.src = '/sorse/assets/splash.mp4';
 	video.controls = false;
 	video.style.display = 'none';
-	sorseLog('Loaded Sorse', 'PostEngineLoad');
+	sorseLog('Loaded Post Engine Load Manager', 'PostEngineLoad');
 
 	video.addEventListener('loadeddata', () => {
 		video.play();
 		function videoLoop() {
-			sorse.isDoneLoading = false;
 			if (video && !video.paused && !video.ended) {
 				sorse.ctx.drawImage(
 					video,
@@ -27,15 +25,13 @@
 	video.addEventListener('ended', () => {
 		sorse.ctx.fillRect(0, 0, sorse.canvas.width, sorse.canvas.height);
 		video.remove();
-		sorse.isDoneLoading = true;
 		sorseLog('Finished loading engine!', 'PostEngineLoad');
 		sorseLog('Loading all Game scripts!', 'PostEngineLoad');
 		let loaded = 0;
 		function loadedScript() {
 			if (loaded === sorseInternalGameData.gameScripts.length) {
 				sorseLog('Loaded all Game scripts!', 'Loader');
-				sorse.readyAllScripts();
-				sorse.renderAllScripts();
+				startSorseEvents();
 			} else {
 				loadFile(sorseInternalGameData.gameScripts[loaded]);
 			}

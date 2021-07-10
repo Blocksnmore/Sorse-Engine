@@ -1,4 +1,5 @@
 // From: https://github.com/timoxley/colornames
+// License: MIT
 
 interface color {
 	name: string;

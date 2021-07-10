@@ -3,13 +3,18 @@ var sorse: Sorse;
 class Sorse {
 	public canvas: HTMLCanvasElement;
 	public ctx: CanvasRenderingContext2D;
-	public isDoneLoading: boolean = false;
 
 	public width: number;
 	public height: number;
 
 	public scripts: SorseScript[] = [];
 	public sprites: SorseSprite[] = [];
+
+	public fps: number = 60;
+
+	public renderedGameFrames: number = 0;
+
+	public gameStartTime: number = 0;
 
 	constructor(init?: boolean) {
 		if (init) {
@@ -20,6 +25,7 @@ class Sorse {
 			this.canvas.height = 720;
 			this.canvas.style.display = 'block';
 			this.canvas.style.margin = 'auto';
+			this.canvas.style.backgroundColor = 'black';
 			this.height = this.canvas.height;
 			this.width = this.canvas.width;
 		} else
@@ -31,7 +37,7 @@ class Sorse {
 	// Script Methods
 	addScript(script: SorseScript) {
 		this.scripts.push(script);
-		for (const sprite of script.scriptData.sprites) {
+		for (const sprite of script.scriptData.sprites ?? []) {
 			this.addSprite(sprite);
 		}
 		return this;
@@ -49,6 +55,11 @@ class Sorse {
 				(a.scriptData.priority ?? 0) - (b.scriptData.priority ?? 0)
 		);
 		for (const script of scriptPriority) {
+			if (
+				script.scriptData.disabled ||
+				typeof script.scriptData.onRender === 'undefined'
+			)
+				continue;
 			script.scriptData.onRender(this);
 		}
 		return this;
@@ -60,6 +71,11 @@ class Sorse {
 				(a.scriptData.priority ?? 0) - (b.scriptData.priority ?? 0)
 		);
 		for (const script of scriptPriority) {
+			if (
+				script.scriptData.disabled ||
+				typeof script.scriptData.onReady === 'undefined'
+			)
+				continue;
 			script.scriptData.onReady(this);
 		}
 		return this;
@@ -72,6 +88,11 @@ class Sorse {
 				(a.spriteData.priority ?? 0) - (b.spriteData.priority ?? 0)
 		);
 		for (const sprite of spritePriority) {
+			if (
+				sprite.spriteData.disabled ||
+				typeof sprite.spriteData.onReady === 'undefined'
+			)
+				continue;
 			sprite.spriteData.onRender(this);
 		}
 		return this;
@@ -83,6 +104,11 @@ class Sorse {
 				(a.spriteData.priority ?? 0) - (b.spriteData.priority ?? 0)
 		);
 		for (const sprite of spritePriority) {
+			if (
+				sprite.spriteData.disabled ||
+				typeof sprite.spriteData.onReady === 'undefined'
+			)
+				continue;
 			sprite.spriteData.onReady(this);
 		}
 		return this;
@@ -115,9 +141,13 @@ class Sorse {
 		return this;
 	}
 
+	setGameFPS(fps: number) {
+		this.fps = fps;
+		return this;
+	}
+
 	// Drawing Methods
 	drawRect({ x, y, width, height, color }: sorseEngineDrawRectInterface) {
-		if (!this.isDoneLoading) return;
 		const previousColor: string | CanvasGradient | CanvasPattern =
 			Object.assign('', this.ctx.fillStyle);
 		this.ctx.fillStyle = color ?? this.ctx.fillStyle;
@@ -127,7 +157,6 @@ class Sorse {
 	}
 
 	drawCircle({ x, y, radius, color }: sorseEngineDrawCircleInterface) {
-		if (!this.isDoneLoading) return;
 		const previousColor: string | CanvasGradient | CanvasPattern =
 			Object.assign('', this.ctx.fillStyle);
 		this.ctx.fillStyle = color ?? this.ctx.fillStyle;
@@ -139,7 +168,6 @@ class Sorse {
 	}
 
 	drawImage({ image, x, y, width, height }: sorseEngineDrawImageInterface) {
-		if (!this.isDoneLoading) return;
 		if (typeof image === 'string') {
 			const img = sorseMakeElement('img') as HTMLImageElement;
 			img.src = image;
@@ -152,7 +180,6 @@ class Sorse {
 	}
 
 	drawText({ text, size, font, x, y, color }: sorseEngineDrawTextInterface) {
-		if (!this.isDoneLoading) return;
 		const previousColor: string | CanvasGradient | CanvasPattern =
 			Object.assign('', this.ctx.fillStyle);
 		this.ctx.fillStyle = color ?? this.ctx.fillStyle;
@@ -173,7 +200,6 @@ class Sorse {
 		color,
 		dash,
 	}: sorseEngineDrawLineInterface) {
-		if (!this.isDoneLoading) return;
 		const previousColor: string | CanvasGradient | CanvasPattern =
 			Object.assign('', this.ctx.strokeStyle);
 		const previousDash: number[] = Object.assign(
@@ -204,8 +230,6 @@ class Sorse {
 		endAngle,
 		color,
 	}: sorseEngineDrawOvalInterface) {
-		if (!this.isDoneLoading) return;
-
 		const previousColor: string | CanvasGradient | CanvasPattern =
 			Object.assign('', this.ctx.strokeStyle);
 		this.ctx.strokeStyle = color ?? this.ctx.strokeStyle;
@@ -215,6 +239,34 @@ class Sorse {
 		this.ctx.strokeStyle = previousColor;
 		return this;
 	}
+
+	clearRect({ x, y, width, height }: sorseEngineClearRectInterface) {
+		this.ctx.clearRect(x, y, width, height);
+		return this;
+	}
+
+	clearScreen() {
+		this.clearRect({
+			x: 0,
+			y: 0,
+			width: this.width,
+			height: this.height,
+		});
+		return this;
+	}
+
+	// Misc Methods
+	getAvgFPS() {
+		return parseInt(
+			(
+				((1000 / (this.gameStartTime / this.renderedGameFrames)) *
+					100) /
+				100
+			)
+				.toString()
+				.split('.')[0]
+		);
+	}
 }
 
 (async () => {
@@ -223,7 +275,6 @@ class Sorse {
 	sorse = new Sorse(true);
 
 	sorse.setDefaultColor(getHexFromName('black'));
-	sorse.isDoneLoading = true;
 	sorse.drawRect({
 		x: 0,
 		y: 0,
@@ -231,7 +282,6 @@ class Sorse {
 		height: sorse.height,
 		color: getHexFromName('black'),
 	});
-	sorse.isDoneLoading = false;
 	sorse.setFont('Arial', 24);
 	sorseLog('Loaded Sorse engine', 'Core');
 })();

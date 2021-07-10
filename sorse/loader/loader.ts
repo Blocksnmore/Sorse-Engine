@@ -94,6 +94,7 @@ class SorseGame {
 				'sorse/core/sprite.js',
 
 				'sorse/core/sorse.js',
+				'sorse/core/events.js',
 				'sorse/core/splash.js',
 			];
 			let loaded = 0;
