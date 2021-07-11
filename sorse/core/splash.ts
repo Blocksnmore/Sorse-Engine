@@ -10,12 +10,15 @@
 		video.play();
 		function videoLoop() {
 			if (video && !video.paused && !video.ended) {
-				sorse.ctx.drawImage(
-					video,
-					0,
-					0,
-					sorse.canvas.width,
-					sorse.canvas.height
+				
+				sorse.drawImage(
+					{
+						image: video,
+						x: 0,
+						y: 0,
+						width: video.videoWidth,
+						height: video.videoHeight,
+					}
 				);
 				requestAnimationFrame(videoLoop);
 			}
@@ -23,7 +26,7 @@
 		requestAnimationFrame(videoLoop);
 	});
 	video.addEventListener('ended', () => {
-		sorse.ctx.fillRect(0, 0, sorse.canvas.width, sorse.canvas.height);
+		sorse.clearScreen();
 		video.remove();
 		sorseLog('Finished loading engine!', 'PostEngineLoad');
 		sorseLog('Loading all Game scripts!', 'PostEngineLoad');

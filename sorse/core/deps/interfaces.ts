@@ -19,7 +19,7 @@ interface sorseEngineDrawLineInterface {
 }
 
 interface sorseEngineDrawImageInterface {
-	image: HTMLImageElement | string;
+	image: HTMLImageElement | HTMLVideoElement | string;
 	x: number;
 	y: number;
 	width: number;

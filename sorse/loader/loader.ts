@@ -69,8 +69,10 @@ class SorseGame {
 		directions.id = 'sorse_load_directions';
 
 		const dir = sorseMakeElement('p') as HTMLParagraphElement;
-		dir.innerHTML =
-			'Due to browser limitations you need to click on this site to start the game load!';
+		dir.innerHTML = [
+			`${sorseInternalGameData.name} version ${sorseInternalGameData.version} by ${sorseInternalGameData.author}`,
+			'Click anywhere to play!',
+		].join('<br>');
 		dir.style.color = 'white';
 		dir.style.fontFamily = 'Arial';
 		dir.style.textAlign = 'center';

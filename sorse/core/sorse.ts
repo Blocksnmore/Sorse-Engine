@@ -1,8 +1,8 @@
 var sorse: Sorse;
 
 class Sorse {
-	public canvas: HTMLCanvasElement;
-	public ctx: CanvasRenderingContext2D;
+	private canvas: HTMLCanvasElement;
+	private ctx: CanvasRenderingContext2D;
 
 	public width: number;
 	public height: number;

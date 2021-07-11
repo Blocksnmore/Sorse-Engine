@@ -28,7 +28,9 @@ function startSorseEvents() {
 		}
 	};
 	document.addEventListener('keydown', inputEvent);
-	document.addEventListener('click', inputEvent);
+	(
+		document.getElementById('sorse_game') as HTMLCanvasElement
+	).addEventListener('click', inputEvent);
 	(() => {
 		let delay = 1000 / sorse.fps;
 		let lastDelay = Date.now();
