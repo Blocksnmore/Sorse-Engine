@@ -43,9 +43,19 @@ class Sorse {
 		return this;
 	}
 
+	// Sprite Methods
 	addSprite(sprite: SorseSprite) {
 		this.sprites.push(sprite);
 		return this;
+	}
+
+	getSpriteByID(id: string): SorseSprite {
+		for (const sprite of this.sprites) {
+			if (sprite.spriteData.id === id) {
+				return sprite;
+			}
+		}
+		return null;
 	}
 
 	// Script Render Methods

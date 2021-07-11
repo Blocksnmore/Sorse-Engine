@@ -90,7 +90,8 @@ class SorseGame {
 			const internalFiles: string[] = [
 				'sorse/deps/color.js',
 
-				'sorse/core/deps/interfaces.js',
+				'sorse/core/interfaces/draw.js',
+				'sorse/core/interfaces/script.js',
 
 				'sorse/core/script.js',
 				'sorse/core/sprite.js',
