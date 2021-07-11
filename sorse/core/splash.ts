@@ -16,8 +16,8 @@
 						image: video,
 						x: 0,
 						y: 0,
-						width: video.videoWidth,
-						height: video.videoHeight,
+						width: sorse.width,
+						height: sorse.height,
 					}
 				);
 				requestAnimationFrame(videoLoop);
