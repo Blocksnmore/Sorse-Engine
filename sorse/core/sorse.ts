@@ -16,6 +16,8 @@ class Sorse {
 
 	public gameStartTime: number = 0;
 
+	private sorseGameVar: Map<string, any> = new Map<string, any>();
+
 	constructor(init?: boolean) {
 		if (init) {
 			this.canvas = sorseMakeElement('canvas') as HTMLCanvasElement;
@@ -41,6 +43,24 @@ class Sorse {
 			this.addSprite(sprite);
 		}
 		return this;
+	}
+
+	createVar(name: string, value: any) {
+		this.sorseGameVar.set(name, value);
+		return this;
+	}
+
+	deleteVar(name: string) {
+		this.sorseGameVar.delete(name);
+		return this;
+	}
+
+	hasVar(name: string): boolean {
+		return this.sorseGameVar.has(name);
+	}
+
+	getVar(name: string): any {
+		return this.sorseGameVar.get(name);
 	}
 
 	// Sprite Methods
@@ -263,6 +283,36 @@ class Sorse {
 			height: this.height,
 		});
 		return this;
+	}
+
+	// Audio Methods
+	playSound(path: string) {
+		class SorseAudioPlayer {
+			private audioElement: HTMLAudioElement;
+			constructor(path: string) {
+				this.audioElement = sorseMakeElement(
+					'audio'
+				) as HTMLAudioElement;
+				this.audioElement.style.display = 'none';
+			}
+			play(time: number = 0) {
+				this.audioElement.currentTime = time;
+				this.audioElement.play();
+				return this;
+			}
+			pause() {
+				this.audioElement.pause();
+				return this;
+			}
+			resume() {
+				this.audioElement.play();
+				return this;
+			}
+			getTime() {
+				return this.audioElement.currentTime;
+			}
+		}
+		return new SorseAudioPlayer(path);
 	}
 
 	// Misc Methods
