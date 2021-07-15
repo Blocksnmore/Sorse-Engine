@@ -5,7 +5,6 @@ interface sorseEngineDrawTextInterface {
 	x: number;
 	y: number;
 	color?: string | CanvasGradient | CanvasPattern;
-	dash?: number[];
 }
 
 interface sorseEngineDrawLineInterface {
@@ -47,8 +46,8 @@ interface sorseEngineDrawOvalInterface {
 	radiusX: number;
 	radiusY: number;
 	rotation: number;
-	startAngle: number;
-	endAngle: number;
+	startAngle?: number;
+	endAngle?: number;
 	color?: string | CanvasGradient | CanvasPattern;
 }
 

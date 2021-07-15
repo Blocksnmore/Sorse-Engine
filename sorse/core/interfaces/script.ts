@@ -10,7 +10,7 @@ interface sorseEngineScriptInterface {
 	sprites?: SorseSprite[];
 
 	onReady?: (engine: Sorse) => void | Promise<void>;
-	onRender?: (engine: Sorse) => void | Promise<void>;
+	onRender: (engine: Sorse) => void | Promise<void>;
 	onInput?: (engine: Sorse, event: KeyboardEvent | MouseEvent) => void | Promise<void>;
 }
 
@@ -23,6 +23,6 @@ interface sorseEngineSpriteInterface {
     id?: string;
 
 	onReady?: (engine: Sorse) => void | Promise<void>;
-	onRender?: (engine: Sorse) => void | Promise<void>;
+	onRender: (engine: Sorse) => void | Promise<void>;
 	onInput?: (engine: Sorse, event: KeyboardEvent | MouseEvent) => void | Promise<void>;
 }

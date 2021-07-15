@@ -201,7 +201,7 @@ class Sorse {
 		if (typeof image === 'string') {
 			const img = sorseMakeElement('img') as HTMLImageElement;
 			img.src = image;
-			this.ctx.drawImage(img, x, y, width, height);
+			this.drawImage({image: img, x, y, width, height});
 			img.remove();
 		} else {
 			this.ctx.drawImage(image, x, y, width, height);
@@ -264,7 +264,7 @@ class Sorse {
 			Object.assign('', this.ctx.strokeStyle);
 		this.ctx.strokeStyle = color ?? this.ctx.strokeStyle;
 		this.ctx.beginPath();
-		this.ctx.ellipse(x, y, radiusX, radiusY, rotation, 0, 2 * Math.PI);
+		this.ctx.ellipse(x, y, radiusX, radiusY, rotation, startAngle ?? 0, endAngle ?? 2 * Math.PI);
 		this.ctx.fill();
 		this.ctx.strokeStyle = previousColor;
 		return this;
