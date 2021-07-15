@@ -1,5 +1,5 @@
 site_name: Sorse Engine docs
-site_url: ''
+site_url: 'https://blocksnmore.github.io/Sorse-Engine/'
 use_directory_urls: false
 theme:
     palette:
