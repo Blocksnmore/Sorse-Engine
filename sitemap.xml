@@ -6,7 +6,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://blocksnmore.github.io/Sorse-Engine/sdk/engine/</loc>
+         <loc>https://blocksnmore.github.io/Sorse-Engine/sdk/</loc>
          <lastmod>2021-07-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -37,6 +37,11 @@
     </url>
     <url>
          <loc>https://blocksnmore.github.io/Sorse-Engine/setup/</loc>
+         <lastmod>2021-07-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://blocksnmore.github.io/Sorse-Engine/tutorial/first%20sorse%20game/</loc>
          <lastmod>2021-07-16</lastmod>
          <changefreq>daily</changefreq>
     </url>

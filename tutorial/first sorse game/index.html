@@ -1,0 +1,1236 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://blocksnmore.github.io/Sorse-Engine/tutorial/first%20sorse%20game/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.10">
+    
+    
+      
+        <title>Making your first Sorse Engine game - Sorse Engine docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1fe995fd.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#making-your-first-sorse-engine-game" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sorse Engine docs" class="md-header__button md-logo" aria-label="Sorse Engine docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sorse Engine docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Making your first Sorse Engine game
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sorse Engine docs" class="md-nav__button md-logo" aria-label="Sorse Engine docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Sorse Engine docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome to Sorse Engine
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        Sdk
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Sdk" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Sdk
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/" class="md-nav__link">
+        Sorse Engine SDK
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      <label class="md-nav__link" for="__nav_2_2">
+        Engine
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Engine" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Engine
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2_1" type="checkbox" id="__nav_2_2_1" >
+      
+      <label class="md-nav__link" for="__nav_2_2_1">
+        Methods
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Methods" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Methods
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/engine/methods/defaults/" class="md-nav__link">
+        Defaults
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/engine/methods/draw/" class="md-nav__link">
+        Draw
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/engine/methods/var/" class="md-nav__link">
+        Var
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      <label class="md-nav__link" for="__nav_2_3">
+        Script
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Script" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Script
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/script/" class="md-nav__link">
+        Sorse Scripts
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      <label class="md-nav__link" for="__nav_2_4">
+        Sprite
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Sprite" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Sprite
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sdk/sprite/" class="md-nav__link">
+        Sorse Sprites
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Setup
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Setup" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Setup
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/" class="md-nav__link">
+        Getting started
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      <label class="md-nav__link" for="__nav_4">
+        Tutorial
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tutorial" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorial
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" type="checkbox" id="__nav_4_1" checked>
+      
+      <label class="md-nav__link" for="__nav_4_1">
+        First sorse game
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="First sorse game" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          First sorse game
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Making your first Sorse Engine game
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Making your first Sorse Engine game
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-game-should-you-make" class="md-nav__link">
+    What game should you make?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    Getting started
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-our-enviroment" class="md-nav__link">
+    Setting up our enviroment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-our-script" class="md-nav__link">
+    Creating our script
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-the-game-logic" class="md-nav__link">
+    Writing the game logic
+  </a>
+  
+    <nav class="md-nav" aria-label="Writing the game logic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ready-function" class="md-nav__link">
+    Ready Function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#render-function" class="md-nav__link">
+    Render Function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input-function" class="md-nav__link">
+    Input Function
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finishing-up-our-game" class="md-nav__link">
+    Finishing up our game
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-notes" class="md-nav__link">
+    Final notes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-source-code" class="md-nav__link">
+    Final Source Code
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-game-should-you-make" class="md-nav__link">
+    What game should you make?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    Getting started
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-our-enviroment" class="md-nav__link">
+    Setting up our enviroment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-our-script" class="md-nav__link">
+    Creating our script
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-the-game-logic" class="md-nav__link">
+    Writing the game logic
+  </a>
+  
+    <nav class="md-nav" aria-label="Writing the game logic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ready-function" class="md-nav__link">
+    Ready Function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#render-function" class="md-nav__link">
+    Render Function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input-function" class="md-nav__link">
+    Input Function
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finishing-up-our-game" class="md-nav__link">
+    Finishing up our game
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-notes" class="md-nav__link">
+    Final notes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-source-code" class="md-nav__link">
+    Final Source Code
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="making-your-first-sorse-engine-game">Making your first Sorse Engine game</h1>
+<p>Creating games in Sorse Engine is easy! This tutorial will show how to create your very first game</p>
+<h2 id="what-game-should-you-make">What game should you make?</h2>
+<p>You could make any game you choose but for this tutorial we're going to make a simple clicker game</p>
+<h2 id="getting-started">Getting started</h2>
+<p>In order to start making games in Sorse Engine complete our <a href="https://blocksnmore.github.io/Sorse-Engine/setup/">Getting Started</a> guide.</p>
+<h2 id="setting-up-our-enviroment">Setting up our enviroment</h2>
+<p>For this example we will be using VSCode &amp; the Intelli-Sense plugin.
+Set up a new project in VSCode and add the Sorse folder from the <a href="https://github.com/Blocksnmore/Sorse-Engine/releases">Releases Page</a> into your project.
+Create an <code>index.html</code> file which will be our main file and insert the following code:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span>
+        <span class="na">src</span><span class="o">=</span><span class="s">&quot;sorse/loader/loader.js&quot;</span>
+        <span class="na">onload</span><span class="o">=</span><span class="s">&quot;(()=&gt;{</span>
+<span class="s">            new SorseGame({</span>
+<span class="s">                name: &#39;My first game&#39;,</span>
+<span class="s">                gameScripts: [],</span>
+<span class="s">                author: &#39;Sorse Engine Documentation&#39;,</span>
+<span class="s">                version: &#39;1.0.0&#39;,</span>
+<span class="s">                description: &#39;Tutorial game for the Sorse Engine Docs&#39;,</span>
+<span class="s">            });</span>
+<span class="s">        })()&quot;</span>
+    <span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table>
+<p>Finally create a file called <code>tsconfig.json</code> with the following content:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;compilerOptions&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;lib&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;ES2015&quot;</span><span class="p">,</span> <span class="s2">&quot;DOM&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p>Now we're ready to start coding!</p>
+<h2 id="creating-our-script">Creating our script</h2>
+<p>Create a new folder called <code>scripts</code> in the root directory, then create a file called <code>main.ts</code>.
+This should be your current structure: <br>
+<img alt="File Structure" src="img/tutorial_file_struct_1.png" />
+<br>
+Now write the following in <code>main.ts</code>:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">new</span> <span class="nx">SorseScript</span><span class="p">({</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Main script&#39;</span><span class="p">,</span>
+    <span class="nx">onReady</span><span class="p">(</span><span class="nx">sorse</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Ready Code</span>
+    <span class="p">},</span>
+    <span class="nx">onRender</span><span class="p">(</span><span class="nx">sorse</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Render Code</span>
+    <span class="p">},</span>
+    <span class="nx">onInput</span><span class="p">(</span><span class="nx">sorse</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Input Code</span>
+    <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div>
+</td></tr></table>
+<p>Now we have our completed script file!</p>
+<h2 id="writing-the-game-logic">Writing the game logic</h2>
+<p>Now that our script is compled we can start writing our code!</p>
+<h3 id="ready-function">Ready Function</h3>
+<p>First we're going to start writing our <code>onReady</code> function.
+You should use the <code>onReady</code> function to initialize all of your variables, so let's do that!
+Our game is going to use 4 variables: <code>clicks</code>, <code>upgrades</code>, <code>upgradeCost</code>, and <code>upgradeMultiplier</code>.
+You also want to configure your game FPS here.
+Use the following code to initialize the variables:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">sorse</span><span class="p">.</span><span class="nx">setGameFPS</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
+<span class="nx">sorse</span><span class="p">.</span><span class="nx">createVar</span><span class="p">(</span><span class="s1">&#39;clicks&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="nx">sorse</span><span class="p">.</span><span class="nx">createVar</span><span class="p">(</span><span class="s1">&#39;upgrades&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="nx">sorse</span><span class="p">.</span><span class="nx">createVar</span><span class="p">(</span><span class="s1">&#39;upgradeMultiplier&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="nx">sorse</span><span class="p">.</span><span class="nx">createVar</span><span class="p">(</span><span class="s1">&#39;upgradeCost&#39;</span><span class="p">,</span> <span class="mi">1</span> <span class="o">*</span> <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgradeMultiplier&#39;</span><span class="p">));</span>
+</code></pre></div>
+</td></tr></table>
+<p>If you want to increase the cost of each upgrade then change the <code>upgradeMultiplier</code> variable.</p>
+<h3 id="render-function">Render Function</h3>
+<p>Now let's start writing the <code>onRender</code> function.
+Use the following code for our function:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nx">sorse</span><span class="p">.</span><span class="nx">clearScreen</span><span class="p">();</span>
+<span class="nx">sorse</span><span class="p">.</span><span class="nx">drawText</span><span class="p">({</span>
+    <span class="nx">x</span>: <span class="kt">sorse.width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">y</span>: <span class="kt">sorse.height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">size</span>: <span class="kt">24</span><span class="p">,</span>
+    <span class="nx">text</span><span class="o">:</span> <span class="sb">`Clicks: </span><span class="si">${</span><span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;clicks&#39;</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
+<span class="p">});</span>
+<span class="nx">sorse</span><span class="p">.</span><span class="nx">drawText</span><span class="p">({</span>
+    <span class="nx">x</span>: <span class="kt">sorse.width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">y</span>: <span class="kt">sorse.height</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">24</span><span class="p">,</span>
+    <span class="nx">size</span>: <span class="kt">24</span><span class="p">,</span>
+    <span class="nx">text</span><span class="o">:</span> <span class="sb">`Next upgrade: </span><span class="si">${</span><span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgradeCost&#39;</span><span class="p">)</span><span class="si">}</span><span class="sb"> Clicks`</span><span class="p">,</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
+<span class="p">});</span>
+<span class="nx">sorse</span><span class="p">.</span><span class="nx">drawText</span><span class="p">({</span>
+    <span class="nx">x</span>: <span class="kt">sorse.width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">y</span>: <span class="kt">sorse.height</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">size</span>: <span class="kt">24</span><span class="p">,</span>
+    <span class="nx">text</span><span class="o">:</span> <span class="sb">`Press Enter to buy`</span><span class="p">,</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
+<span class="p">});</span>
+<span class="nx">sorse</span><span class="p">.</span><span class="nx">drawText</span><span class="p">({</span>
+    <span class="nx">x</span>: <span class="kt">sorse.width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">y</span>: <span class="kt">sorse.height</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="nx">size</span>: <span class="kt">24</span><span class="p">,</span>
+    <span class="nx">text</span><span class="o">:</span> <span class="sb">`Click multiplier: </span><span class="si">${</span><span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgrades&#39;</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
+<span class="p">});</span>
+</code></pre></div>
+</td></tr></table>
+<p>You can change the text color by modifying the <code>color</code> value.</p>
+<h3 id="input-function">Input Function</h3>
+<p>Finally let's work on the <code>onInput</code> function.
+This event is fired whenever a key is pressed or the mouse is clicked.
+You can use <code>instanceOf</code> to check if the event is from the Mouse of Keyboard.
+Use the following code for your function:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(</span><span class="nx">event</span> <span class="k">instanceof</span> <span class="nx">MouseEvent</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">sorse</span><span class="p">.</span><span class="nx">createVar</span><span class="p">(</span>
+        <span class="s1">&#39;clicks&#39;</span><span class="p">,</span>
+        <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;clicks&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgrades&#39;</span><span class="p">)</span>
+    <span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">key</span> <span class="o">===</span> <span class="s1">&#39;Enter&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;clicks&#39;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgradeCost&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">sorse</span><span class="p">.</span><span class="nx">createVar</span><span class="p">(</span>
+                <span class="s1">&#39;clicks&#39;</span><span class="p">,</span>
+                <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;clicks&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgradeCost&#39;</span><span class="p">)</span>
+            <span class="p">);</span>
+            <span class="nx">sorse</span><span class="p">.</span><span class="nx">createVar</span><span class="p">(</span><span class="s1">&#39;upgrades&#39;</span><span class="p">,</span> <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgrades&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+            <span class="nx">sorse</span><span class="p">.</span><span class="nx">createVar</span><span class="p">(</span>
+                <span class="s1">&#39;upgradeCost&#39;</span><span class="p">,</span>
+                <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgradeCost&#39;</span><span class="p">)</span> <span class="o">*</span> <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgradeMultiplier&#39;</span><span class="p">)</span>
+            <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+<p>Now we're done with our code! Let's finish up our game.</p>
+<h2 id="finishing-up-our-game">Finishing up our game</h2>
+<p>Compile your code in the terminal by running <code>tsc --build</code>.
+Also add your script to the <code>index.html</code> file like so:<br>
+<strong>Replace all <code>.ts</code> extensions with <code>.js</code></strong></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gameScripts: [&#39;/scripts/main.js&#39;]
+</code></pre></div>
+</td></tr></table>
+<p>Now view <code>index.html</code> on your webserver and try your game out!</p>
+<h2 id="final-notes">Final notes</h2>
+<p>You have now created your first ever game in Sorse Engine!
+You can now create your own games using Sorse Engine.
+Having any issues? Try checking out the <a href="https://blocksnmore.github.io/Sorse-Engine/sdk/">Sorse Engine SDK</a></p>
+<h2 id="final-source-code">Final Source Code</h2>
+<p>Here is the final source code for the files</p>
+<p>Index.html:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span>
+        <span class="na">src</span><span class="o">=</span><span class="s">&quot;sorse/loader/loader.js&quot;</span>
+        <span class="na">onload</span><span class="o">=</span><span class="s">&quot;(()=&gt;{</span>
+<span class="s">            new SorseGame({</span>
+<span class="s">                name: &#39;My first game&#39;,</span>
+<span class="s">                gameScripts: [&#39;/scripts/main.js&#39;],</span>
+<span class="s">                author: &#39;Sorse Engine Documentation&#39;,</span>
+<span class="s">                version: &#39;1.0.0&#39;,</span>
+<span class="s">                description: &#39;Tutorial game for the Sorse Engine Docs&#39;,</span>
+<span class="s">            });</span>
+<span class="s">        })()&quot;</span>
+    <span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</code></pre></div>
+</td></tr></table>
+<p>Main.ts:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">new</span> <span class="nx">SorseScript</span><span class="p">({</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Main script&#39;</span><span class="p">,</span>
+    <span class="nx">onReady</span><span class="p">(</span><span class="nx">sorse</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Ready Code</span>
+        <span class="nx">sorse</span><span class="p">.</span><span class="nx">createVar</span><span class="p">(</span><span class="s1">&#39;clicks&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="nx">sorse</span><span class="p">.</span><span class="nx">createVar</span><span class="p">(</span><span class="s1">&#39;upgrades&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="nx">sorse</span><span class="p">.</span><span class="nx">createVar</span><span class="p">(</span><span class="s1">&#39;upgradeMultiplier&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+        <span class="nx">sorse</span><span class="p">.</span><span class="nx">createVar</span><span class="p">(</span><span class="s1">&#39;upgradeCost&#39;</span><span class="p">,</span> <span class="mi">1</span> <span class="o">*</span> <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgradeMultiplier&#39;</span><span class="p">));</span>
+    <span class="p">},</span>
+    <span class="nx">onRender</span><span class="p">(</span><span class="nx">sorse</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Render Code</span>
+        <span class="nx">sorse</span><span class="p">.</span><span class="nx">clearScreen</span><span class="p">();</span>
+        <span class="nx">sorse</span><span class="p">.</span><span class="nx">drawText</span><span class="p">({</span>
+            <span class="nx">x</span>: <span class="kt">sorse.width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="nx">y</span>: <span class="kt">sorse.height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="nx">size</span>: <span class="kt">24</span><span class="p">,</span>
+            <span class="nx">text</span><span class="o">:</span> <span class="sb">`Clicks: </span><span class="si">${</span><span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;clicks&#39;</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+            <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
+        <span class="p">});</span>
+        <span class="nx">sorse</span><span class="p">.</span><span class="nx">drawText</span><span class="p">({</span>
+            <span class="nx">x</span>: <span class="kt">sorse.width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="nx">y</span>: <span class="kt">sorse.height</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">24</span><span class="p">,</span>
+            <span class="nx">size</span>: <span class="kt">24</span><span class="p">,</span>
+            <span class="nx">text</span><span class="o">:</span> <span class="sb">`Next upgrade: </span><span class="si">${</span><span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgradeCost&#39;</span><span class="p">)</span><span class="si">}</span><span class="sb"> Clicks`</span><span class="p">,</span>
+            <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
+        <span class="p">});</span>
+        <span class="nx">sorse</span><span class="p">.</span><span class="nx">drawText</span><span class="p">({</span>
+            <span class="nx">x</span>: <span class="kt">sorse.width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="nx">y</span>: <span class="kt">sorse.height</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="nx">size</span>: <span class="kt">24</span><span class="p">,</span>
+            <span class="nx">text</span><span class="o">:</span> <span class="sb">`Press Enter to buy`</span><span class="p">,</span>
+            <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
+        <span class="p">});</span>
+        <span class="nx">sorse</span><span class="p">.</span><span class="nx">drawText</span><span class="p">({</span>
+            <span class="nx">x</span>: <span class="kt">sorse.width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="nx">y</span>: <span class="kt">sorse.height</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="nx">size</span>: <span class="kt">24</span><span class="p">,</span>
+            <span class="nx">text</span><span class="o">:</span> <span class="sb">`Click multiplier: </span><span class="si">${</span><span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgrades&#39;</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+            <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
+        <span class="p">});</span>
+    <span class="p">},</span>
+    <span class="nx">onInput</span><span class="p">(</span><span class="nx">sorse</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Input Code</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">event</span> <span class="k">instanceof</span> <span class="nx">MouseEvent</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">sorse</span><span class="p">.</span><span class="nx">createVar</span><span class="p">(</span>
+                <span class="s1">&#39;clicks&#39;</span><span class="p">,</span>
+                <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;clicks&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgrades&#39;</span><span class="p">)</span>
+            <span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">key</span> <span class="o">===</span> <span class="s1">&#39;Enter&#39;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;clicks&#39;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgradeCost&#39;</span><span class="p">))</span> <span class="p">{</span>
+                    <span class="nx">sorse</span><span class="p">.</span><span class="nx">createVar</span><span class="p">(</span>
+                        <span class="s1">&#39;clicks&#39;</span><span class="p">,</span>
+                        <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;clicks&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgradeCost&#39;</span><span class="p">)</span>
+                    <span class="p">);</span>
+                    <span class="nx">sorse</span><span class="p">.</span><span class="nx">createVar</span><span class="p">(</span><span class="s1">&#39;upgrades&#39;</span><span class="p">,</span> <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgrades&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+                    <span class="nx">sorse</span><span class="p">.</span><span class="nx">createVar</span><span class="p">(</span>
+                        <span class="s1">&#39;upgradeCost&#39;</span><span class="p">,</span>
+                        <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgradeCost&#39;</span><span class="p">)</span> <span class="o">*</span>
+                            <span class="nx">sorse</span><span class="p">.</span><span class="nx">getVar</span><span class="p">(</span><span class="s1">&#39;upgradeMultiplier&#39;</span><span class="p">)</span>
+                    <span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div>
+</td></tr></table>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <!-- 
+    We're open source on github! https://github.com/blocksnmore/sorse-engine
+    Feel free to check out our github instead of using view-source
+-->
+
+
+<meta property="og:site_name" content="Sorse Engine Documentation"/>
+<meta property="og:title" content="Sorse Engine Docs"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="/"/>
+<meta property="og:image" content="http://localhost:8000/Sorse-Engine/assets/images/favicon.png"/>
+<meta property="og:description" content="Sorse Engine is a simple yet capable 2D game engine written in TS & JS"/>
+<meta name="theme-color" content="#4051b5">
+
+<!-- Footer -->
+<footer class="md-footer">
+
+  <!-- Link to previous and/or next page -->
+  
+    <nav
+      class="md-footer__inner md-grid"
+      aria-label="Footer"
+    >
+
+      <!-- Link to previous page -->
+      
+        
+        <a
+          href="../../setup/"
+          class="md-footer__link md-footer__link--prev"
+          aria-label="Previous: Getting started"
+          rel="prev"
+        >
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Getting started
+            </div>
+          </div>
+        </a>
+      
+
+      <!-- Link to next page -->
+      
+    </nav>
+  
+
+  <!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+
+      <!-- Copyright and theme information -->
+      <div class="md-footer-copyright">
+        
+        Sorse engine is created by
+        <a
+          href="https://github.com/blocksnmore"
+          target="_blank" rel="noopener"
+        >
+          Blocks_n_more
+        </a>
+        
+      </div>
+
+      <!-- Social links -->
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+    
+  </body>
+</html>
