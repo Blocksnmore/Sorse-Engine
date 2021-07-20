@@ -166,7 +166,7 @@ class Sorse {
 		return this;
 	}
 
-	setFont(font: string, size: number) {
+	setFont({ font, size }: sorseEngineDefaultFont) {
 		this.fontStyle = `${size}px ${font}`;
 		return this;
 	}
@@ -210,10 +210,21 @@ class Sorse {
 		return this;
 	}
 
-	drawText({ text, size, font, x, y, color, align = 'right' }: sorseEngineDrawTextInterface) {
+	drawText({
+		text,
+		size,
+		font,
+		x,
+		y,
+		color,
+		align = 'right',
+		modifier = '',
+	}: sorseEngineDrawTextInterface) {
 		this.ctx.textAlign = align;
 		this.ctx.fillStyle = color ?? this.fillStyleColor;
-		this.ctx.font = `${size}px ${font ?? this.fontStyle.split('px ')[1]}`;
+		this.ctx.font = `${modifier}${
+			modifier.length > 1 && !modifier.endsWith(' ') ? ' ' : ''
+		}${size}px ${font ?? this.fontStyle.split('px ')[1]}`;
 		this.ctx.fillText(text, x, y);
 		this.ctx.font = this.fontStyle;
 		this.ctx.fillStyle = this.fillStyleColor;
@@ -352,14 +363,17 @@ class SorseAudioPlayer {
 
 	sorse = new Sorse(true);
 
-	sorse.setDefaultColor(getHexFromName('black'));
+	sorse.setDefaultColor('black');
 	sorse.drawRect({
 		x: 0,
 		y: 0,
 		width: sorse.width,
 		height: sorse.height,
-		color: getHexFromName('black'),
+		color: 'black',
 	});
-	sorse.setFont('Arial', 24);
+	sorse.setFont({
+		font: 'Arial',
+		size: 24,
+	});
 	sorseLog('Loaded Sorse engine', 'Core');
 })();

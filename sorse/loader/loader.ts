@@ -88,10 +88,9 @@ class SorseGame {
 			directions.remove();
 			sorseLog('Loading all Sorse files', 'Loader');
 			const internalFiles: string[] = [
-				'sorse/deps/color.js',
-
 				'sorse/core/interfaces/draw.js',
 				'sorse/core/interfaces/script.js',
+				'sorse/core/interfaces/defaults.js',
 
 				'sorse/core/script.js',
 				'sorse/core/sprite.js',

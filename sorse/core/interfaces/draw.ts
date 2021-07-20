@@ -6,6 +6,7 @@ interface sorseEngineDrawTextInterface {
 	y: number;
 	color?: string | CanvasGradient | CanvasPattern;
 	align?: CanvasTextAlign;
+	modifier?: string;
 }
 
 interface sorseEngineDrawLineInterface {
