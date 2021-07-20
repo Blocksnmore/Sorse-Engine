@@ -18,6 +18,11 @@ class Sorse {
 
 	private sorseGameVar: Map<string, any> = new Map<string, any>();
 
+	private fillStyleColor: string | CanvasGradient | CanvasPattern = 'black';
+	private strokeStyleColor: string | CanvasGradient | CanvasPattern = 'black';
+	private fontStyle: string = '24px Arial';
+	private lineDashStyle: number[] = [];
+
 	constructor(init?: boolean) {
 		if (init) {
 			this.canvas = sorseMakeElement('canvas') as HTMLCanvasElement;
@@ -146,28 +151,28 @@ class Sorse {
 
 	// Set Methods
 	setDefaultColor(color: string | CanvasGradient | CanvasPattern) {
-		this.ctx.fillStyle = color;
-		this.ctx.strokeStyle = color;
+		this.setFillColor(color);
+		this.setStrokeColor(color);
 		return this;
 	}
 
 	setFillColor(color: string | CanvasGradient | CanvasPattern) {
-		this.ctx.fillStyle = color;
+		this.fillStyleColor = color;
 		return this;
 	}
 
 	setStrokeColor(color: string | CanvasGradient | CanvasPattern) {
-		this.ctx.strokeStyle = color;
+		this.strokeStyleColor = color;
 		return this;
 	}
 
 	setFont(font: string, size: number) {
-		this.ctx.font = `${size}px ${font}`;
+		this.fontStyle = `${size}px ${font}`;
 		return this;
 	}
 
 	setLineDash(dash: number[]) {
-		this.ctx.setLineDash(dash);
+		this.lineDashStyle = dash;
 		return this;
 	}
 
@@ -178,22 +183,18 @@ class Sorse {
 
 	// Drawing Methods
 	drawRect({ x, y, width, height, color }: sorseEngineDrawRectInterface) {
-		const previousColor: string | CanvasGradient | CanvasPattern =
-			Object.assign('', this.ctx.fillStyle);
-		this.ctx.fillStyle = color ?? this.ctx.fillStyle;
+		this.ctx.fillStyle = color ?? this.fillStyleColor;
 		this.ctx.fillRect(x, y, width, height);
-		this.ctx.fillStyle = previousColor;
+		this.ctx.fillStyle = this.fillStyleColor;
 		return this;
 	}
 
 	drawCircle({ x, y, radius, color }: sorseEngineDrawCircleInterface) {
-		const previousColor: string | CanvasGradient | CanvasPattern =
-			Object.assign('', this.ctx.fillStyle);
-		this.ctx.fillStyle = color ?? this.ctx.fillStyle;
+		this.ctx.fillStyle = color ?? this.fillStyleColor;
 		this.ctx.beginPath();
 		this.ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
 		this.ctx.fill();
-		this.ctx.fillStyle = previousColor;
+		this.ctx.fillStyle = this.fillStyleColor;
 		return this;
 	}
 
@@ -201,7 +202,7 @@ class Sorse {
 		if (typeof image === 'string') {
 			const img = sorseMakeElement('img') as HTMLImageElement;
 			img.src = image;
-			this.drawImage({image: img, x, y, width, height});
+			this.drawImage({ image: img, x, y, width, height });
 			img.remove();
 		} else {
 			this.ctx.drawImage(image, x, y, width, height);
@@ -209,15 +210,13 @@ class Sorse {
 		return this;
 	}
 
-	drawText({ text, size, font, x, y, color }: sorseEngineDrawTextInterface) {
-		const previousColor: string | CanvasGradient | CanvasPattern =
-			Object.assign('', this.ctx.fillStyle);
-		this.ctx.fillStyle = color ?? this.ctx.fillStyle;
-		const previousFont = Object.assign('', this.ctx.font);
-		this.ctx.font = `${size}px ${font ?? this.ctx.font.split('px ')[1]}`;
+	drawText({ text, size, font, x, y, color, align = 'right' }: sorseEngineDrawTextInterface) {
+		this.ctx.textAlign = align;
+		this.ctx.fillStyle = color ?? this.fillStyleColor;
+		this.ctx.font = `${size}px ${font ?? this.fontStyle.split('px ')[1]}`;
 		this.ctx.fillText(text, x, y);
-		this.ctx.font = previousFont;
-		this.ctx.fillStyle = previousColor;
+		this.ctx.font = this.fontStyle;
+		this.ctx.fillStyle = this.fillStyleColor;
 		return this;
 	}
 
@@ -230,12 +229,7 @@ class Sorse {
 		color,
 		dash,
 	}: sorseEngineDrawLineInterface) {
-		const previousColor: string | CanvasGradient | CanvasPattern =
-			Object.assign('', this.ctx.strokeStyle);
-		const previousDash: number[] = Object.assign(
-			[],
-			this.ctx.getLineDash()
-		);
+		this.ctx.setLineDash(this.lineDashStyle);
 		if (typeof dash !== 'undefined' && typeof dash[0] !== 'undefined') {
 			this.ctx.setLineDash(dash);
 		}
@@ -245,8 +239,8 @@ class Sorse {
 		this.ctx.moveTo(x1, y1);
 		this.ctx.lineTo(x2, y2);
 		this.ctx.stroke();
-		this.ctx.setLineDash(previousDash);
-		this.ctx.strokeStyle = previousColor;
+		this.ctx.setLineDash(this.lineDashStyle);
+		this.ctx.strokeStyle = this.strokeStyleColor;
 		return this;
 	}
 
@@ -260,13 +254,19 @@ class Sorse {
 		endAngle,
 		color,
 	}: sorseEngineDrawOvalInterface) {
-		const previousColor: string | CanvasGradient | CanvasPattern =
-			Object.assign('', this.ctx.strokeStyle);
-		this.ctx.strokeStyle = color ?? this.ctx.strokeStyle;
+		this.ctx.strokeStyle = color ?? this.strokeStyleColor;
 		this.ctx.beginPath();
-		this.ctx.ellipse(x, y, radiusX, radiusY, rotation, startAngle ?? 0, endAngle ?? 2 * Math.PI);
+		this.ctx.ellipse(
+			x,
+			y,
+			radiusX,
+			radiusY,
+			rotation,
+			startAngle ?? 0,
+			endAngle ?? 2 * Math.PI
+		);
 		this.ctx.fill();
-		this.ctx.strokeStyle = previousColor;
+		this.ctx.strokeStyle = this.strokeStyleColor;
 		return this;
 	}
 
@@ -286,33 +286,8 @@ class Sorse {
 	}
 
 	// Audio Methods
-	playSound(path: string) {
-		class SorseAudioPlayer {
-			private audioElement: HTMLAudioElement;
-			constructor(path: string) {
-				this.audioElement = sorseMakeElement(
-					'audio'
-				) as HTMLAudioElement;
-				this.audioElement.style.display = 'none';
-			}
-			play(time: number = 0) {
-				this.audioElement.currentTime = time;
-				this.audioElement.play();
-				return this;
-			}
-			pause() {
-				this.audioElement.pause();
-				return this;
-			}
-			resume() {
-				this.audioElement.play();
-				return this;
-			}
-			getTime() {
-				return this.audioElement.currentTime;
-			}
-		}
-		return new SorseAudioPlayer(path);
+	playSound(path: string, loop: boolean = false) {
+		return new SorseAudioPlayer(path, loop).play();
 	}
 
 	// Misc Methods
@@ -326,6 +301,49 @@ class Sorse {
 				.toString()
 				.split('.')[0]
 		);
+	}
+}
+
+class SorseAudioPlayer {
+	private audioElement: HTMLAudioElement;
+	private shouldRepeat: boolean;
+	constructor(path: string, loop) {
+		this.shouldRepeat = loop;
+		this.audioElement = sorseMakeElement('audio') as HTMLAudioElement;
+		this.audioElement.src = path;
+		this.audioElement.style.display = 'none';
+		this.audioElement.onended = () => {
+			if (this.shouldRepeat) {
+				this.play(0);
+			}
+		};
+	}
+	repeat(loop: boolean) {
+		this.shouldRepeat = loop;
+	}
+	isPlaying() {
+		return !this.audioElement.paused;
+	}
+	play(time: number = 0) {
+		this.audioElement.currentTime = time;
+		this.audioElement.play();
+		return this;
+	}
+	pause() {
+		this.audioElement.pause();
+		return this;
+	}
+	stop() {
+		this.audioElement.pause();
+		this.audioElement.currentTime = 0;
+		return this;
+	}
+	resume() {
+		this.audioElement.play();
+		return this;
+	}
+	getTime() {
+		return this.audioElement.currentTime;
 	}
 }
 

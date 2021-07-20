@@ -1,4 +1,7 @@
 *.js
+documentation/site
+
+# Ignore dev files
 scripts/
 index.html
-documentation/site
+assets/
